@@ -24,9 +24,9 @@ script = ExtResource( 6 )
 [node name="EnemyAnimator" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "Walk"
-frame = 2
+frame = 3
+playing = true
 
 [node name="EnemyCollision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, -4.5 )
 shape = SubResource( 2 )

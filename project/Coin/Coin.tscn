@@ -28,16 +28,18 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 25, 37.5 )
 
-[node name="Coin" type="KinematicBody2D" groups=["coins"]]
+[node name="Coin" type="Area2D"]
 script = ExtResource( 16 )
 
-[node name="CoinAnimator" type="AnimatedSprite" parent="." groups=["coins"]]
+[node name="CoinAnimator" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "float"
-frame = 9
+frame = 7
 playing = true
 
-[node name="CoinCollision" type="CollisionShape2D" parent="." groups=["coins"]]
+[node name="CoinCollision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2.5 )
 shape = SubResource( 2 )
+
+[connection signal="body_entered" from="." to="." method="_on_Coin_body_entered"]

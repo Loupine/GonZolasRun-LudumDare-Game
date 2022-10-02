@@ -24,28 +24,32 @@ func _generate_random_number(minimum:int, maximum:int)-> int:
 func _spawn_new_coin()-> void:
 	var x_position := _generate_random_number(-2000, 2500)
 	var y_position := _generate_random_number(-1500, 1500)
-	var active_coin : KinematicBody2D = coin.instance()
+	var active_coin : Area2D = coin.instance()
+	active_coin.add_to_group("coins")
 	active_coin.position.x = x_position
 	active_coin.position.y = y_position
 	add_child(active_coin)
 	# warning-ignore:return_value_discarded
-	active_coin.connect("collided", self, "_on_Coin_collided")
+	active_coin.connect("score_increased", self, "_on_Coin_score_increase")
 
 
 func _spawn_new_enemy()-> void:
+	
+	var active_enemy : KinematicBody2D = enemy.instance()
+	active_enemy.add_to_group("enemies")
+	active_enemy.call("set_player", get_node("Player"))
 	var x_position := _generate_random_number(-2000, 2500)
 	var y_position := _generate_random_number(-1500, 1500)
-	var active_enemy : KinematicBody2D = enemy.instance()
 	active_enemy.position.x = x_position
 	active_enemy.position.y = y_position
 	add_child(active_enemy)
-	active_enemy.call("set_player", get_node("Player"))
+
+
+func _on_Coin_score_increase()-> void:
+	score += 100
+	print(score)
 
 
 func _on_Timer_timeout()-> void:
 	_spawn_new_coin()
 	_spawn_new_enemy()
-
-
-func _on_Coin_collided()-> void:
-	score += 100

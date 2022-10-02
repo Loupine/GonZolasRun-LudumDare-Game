@@ -6,11 +6,13 @@ const _SPEED := 14
 var _velocity := Vector2.ZERO
 
 onready var animator = find_node("PlayerAnimator")
+onready var collision_shape = find_node("PlayerCollision")
 
 
 func _physics_process(delta:float)-> void:
 	_handle_input(delta)
 	_process_animations()
+	_process_collisions()
 	_velocity = _velocity.limit_length(_SPEED / delta)
 	_velocity = move_and_slide(_velocity, Vector2.UP)
 
@@ -43,6 +45,18 @@ func _process_animations()-> void:
 		animator.set_animation("backside")
 	if _velocity.y > 0:
 		animator.set_animation("shoot_front")
+
+
+func _process_collisions()-> void:
+	for i in get_slide_count():
+		var collision := get_slide_collision(i)
+		if collision.collider.is_in_group("enemies"):
+			die()
+
+
+func die()-> void:
+	visible = false
+	collision_shape.disabled = true
 
 
 func _on_PlayerAnimator_animation_finished()-> void:
