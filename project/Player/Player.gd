@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-const _SPEED := 30
+const _SPEED := 14
 
 var _velocity := Vector2.ZERO
 
@@ -11,9 +11,8 @@ onready var animator = find_node("PlayerAnimator")
 func _physics_process(delta:float)-> void:
 	_handle_input(delta)
 	_process_animations()
-	_velocity = _velocity.limit_length(12 / delta)
+	_velocity = _velocity.limit_length(_SPEED / delta)
 	_velocity = move_and_slide(_velocity, Vector2.UP)
-
 
 
 func _handle_input(delta:float)-> void:

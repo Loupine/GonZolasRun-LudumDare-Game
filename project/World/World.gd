@@ -4,6 +4,7 @@ extends Node2D
 var score := 0
 
 onready var coin := preload("res://Coin/Coin.tscn")
+onready var enemy := preload("res://Enemy/Enemy.tscn")
 onready var player := get_node("Player")
 onready var player_spawn_points := get_node("PlayerSpawnPoints")
 
@@ -20,7 +21,7 @@ func _generate_random_number(minimum:int, maximum:int)-> int:
 	return position_number
 
 
-func _on_Timer_timeout()-> void:
+func _spawn_new_coin()-> void:
 	var x_position := _generate_random_number(-2000, 2500)
 	var y_position := _generate_random_number(-1500, 1500)
 	var active_coin : KinematicBody2D = coin.instance()
@@ -31,6 +32,20 @@ func _on_Timer_timeout()-> void:
 	active_coin.connect("collided", self, "_on_Coin_collided")
 
 
+func _spawn_new_enemy()-> void:
+	var x_position := _generate_random_number(-2000, 2500)
+	var y_position := _generate_random_number(-1500, 1500)
+	var active_enemy : KinematicBody2D = enemy.instance()
+	active_enemy.position.x = x_position
+	active_enemy.position.y = y_position
+	add_child(active_enemy)
+	active_enemy.call("set_player", get_node("Player"))
+
+
+func _on_Timer_timeout()-> void:
+	_spawn_new_coin()
+	_spawn_new_enemy()
+
+
 func _on_Coin_collided()-> void:
 	score += 100
-	print(score)
