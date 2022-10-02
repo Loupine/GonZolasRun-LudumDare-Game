@@ -29,9 +29,13 @@ radius = 37.0135
 [node name="Player" type="KinematicBody2D"]
 
 [node name="PlayerAnimator" type="AnimatedSprite" parent="."]
+scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 1 )
 animation = "shoot_front"
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource( 2 )
+
+[node name="Camera" type="Camera2D" parent="."]
+current = true
