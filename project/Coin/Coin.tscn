@@ -35,7 +35,7 @@ script = ExtResource( 16 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
 animation = "float"
-frame = 7
+frame = 2
 playing = true
 
 [node name="CoinCollision" type="CollisionShape2D" parent="."]

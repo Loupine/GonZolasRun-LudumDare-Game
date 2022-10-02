@@ -5,6 +5,7 @@ var score := 0
 
 onready var coin := preload("res://Coin/Coin.tscn")
 onready var enemy := preload("res://Enemy/Enemy.tscn")
+onready var bullet := preload("res://World/Bullet.tscn")
 onready var player := get_node("Player")
 onready var player_spawn_points := get_node("PlayerSpawnPoints")
 
@@ -53,3 +54,30 @@ func _on_Coin_score_increase()-> void:
 func _on_Timer_timeout()-> void:
 	_spawn_new_coin()
 	_spawn_new_enemy()
+
+
+func _on_Player_shot_fired(x_velocity, y_velocity):
+	var _bullet_velocity := Vector2(500 * x_velocity, 500 * y_velocity)
+	_bullet_velocity = _bullet_velocity.limit_length(500)
+	var active_bullet : KinematicBody2D = bullet.instance()
+	active_bullet.add_to_group("bullets")
+	active_bullet.position = player.position
+	add_child(active_bullet)
+	active_bullet.set_velocity(_bullet_velocity)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

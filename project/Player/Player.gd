@@ -1,6 +1,8 @@
 extends KinematicBody2D
 
 
+signal shot_fired(x_velocity, y_velocity)
+
 const _SPEED := 14
 
 var _velocity := Vector2.ZERO
@@ -31,7 +33,8 @@ func _handle_input(delta:float)-> void:
 	if not (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
 		_velocity.x = 0.0
 	if Input.is_action_just_pressed("shoot"):
-		animator.play("shoot_front")
+		animator.set_playing(true)
+		emit_signal("shot_fired", clamp(_velocity.x, -1.0, 1.0), clamp(_velocity.y, -1.0, 1.0))
 
 
 func _process_animations()-> void:

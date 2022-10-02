@@ -120,4 +120,5 @@ position = Vector2( -944, -1434 )
 wait_time = 2.5
 autostart = true
 
+[connection signal="shot_fired" from="Player" to="." method="_on_Player_shot_fired"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
