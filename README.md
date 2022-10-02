@@ -1,10 +1,12 @@
 # Project 2, Ludum Dare Entry:
 
-A 2D and 3D game created for the Ludum Dare compo. Also created for Project 2 in CS315.
+A 2D game created using Godot Engine for the Ludum Dare Compo. Also created for Project 2 in CS315.
 
-## Third Party Assets
+## Assets
 
+- Player, enemy, coin, chest, and tile sprites were all made by myself using [Piskel](https://www.piskelapp.com/)
 
+- Music made using a TripleOscillator and a Kicker in [LMMS](https://lmms.io/)
 
 ## Project Report:
 
