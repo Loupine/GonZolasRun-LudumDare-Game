@@ -19,13 +19,12 @@ extents = Vector2( 25, 14.5 )
 
 [node name="Enemy" type="KinematicBody2D"]
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="EnemyAnimator" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "Walk"
-frame = 2
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="EnemyCollision" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0, -4.5 )
 shape = SubResource( 2 )
