@@ -4,7 +4,7 @@ A 2D game created using Godot Engine for the Ludum Dare Compo. Also created for 
 
 ## Assets
 
-- Player, enemy, coin, chest, and tile sprites were all made by myself using [Piskel](https://www.piskelapp.com/)
+- Player, enemy, coin, and tile sprites were all made by myself using [Piskel](https://www.piskelapp.com/)
 
 - Music made using a TripleOscillator and a Kicker in [LMMS](https://lmms.io/)
 
