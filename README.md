@@ -1,6 +1,6 @@
 # Project 2, Ludum Dare Entry:
 
-A 2D game created using Godot Engine for the Ludum Dare Compo. Also created for Project 2 in CS315.
+A 2D game created using Godot Engine for the Ludum Dare Jam. Also created for Project 2 in CS315.
 
 ## Assets
 
