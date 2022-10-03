@@ -37,7 +37,6 @@ func _spawn_new_coin()-> void:
 
 
 func _spawn_new_enemy()-> void:
-	
 	var active_enemy : KinematicBody2D = enemy.instance()
 	active_enemy.add_to_group("enemies")
 	active_enemy.call("set_player", get_node("Player"))

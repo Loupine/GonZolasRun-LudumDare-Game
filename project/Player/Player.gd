@@ -63,6 +63,8 @@ func die()-> void:
 	visible = false
 	collision_shape.disabled = true
 	_is_dead = true
+	# warning-ignore:return_value_discarded
+	get_tree().change_scene("res://TitleScreen/TitleScreen.tscn")
 
 
 func _on_PlayerAnimator_animation_finished()-> void:
