@@ -8,6 +8,8 @@ A 2D game created using Godot Engine for the Ludum Dare Compo. Also created for 
 
 - Music made using a TripleOscillator and a Kicker in [LMMS](https://lmms.io/)
 
+- Chailce Noggin Font by [ripoof](https://www.fontspace.com/chailce-noggin-font-f83197), and licensed as "Public Domain"
+
 ## Project Report:
 
 
