@@ -7,9 +7,12 @@ const _SPEED := 14
 
 var _velocity := Vector2.ZERO
 var _is_dead := false
+var score := 0
 
-onready var animator = find_node("PlayerAnimator")
-onready var collision_shape = find_node("PlayerCollision")
+onready var score_label := get_node("Camera/HUD/Score")
+onready var reset_button := get_node("Camera/HUD/ResetButton")
+onready var animator := get_node("PlayerAnimator")
+onready var collision_shape := get_node("PlayerCollision")
 
 
 func _physics_process(delta:float)-> void:
@@ -18,6 +21,15 @@ func _physics_process(delta:float)-> void:
 	_process_collisions()
 	_velocity = _velocity.limit_length(_SPEED / delta)
 	_velocity = move_and_slide(_velocity, Vector2.UP)
+	
+	if reset_button.pressed:
+		# warning-ignore:return_value_discarded
+		get_tree().change_scene("res://TitleScreen/TitleScreen.tscn")
+
+
+func increase_score()-> void:
+	score += 100
+	score_label.set_text("Score:" + String(score))
 
 
 func _handle_input(delta:float)-> void:
@@ -56,15 +68,14 @@ func _process_collisions()-> void:
 	for i in get_slide_count():
 		var collision := get_slide_collision(i)
 		if collision.collider.is_in_group("enemies"):
-			die()
+			_die()
 
 
-func die()-> void:
-	visible = false
+func _die()-> void:
 	collision_shape.disabled = true
 	_is_dead = true
-	# warning-ignore:return_value_discarded
-	get_tree().change_scene("res://TitleScreen/TitleScreen.tscn")
+	animator.visible = false
+	reset_button.rect_position = Vector2(-125, 143)
 
 
 func _on_PlayerAnimator_animation_finished()-> void:

@@ -14,7 +14,6 @@ func _physics_process(delta:float)-> void:
 	_velocity.x = _SPEED / delta
 	_velocity = _velocity.limit_length(_SPEED / delta)
 	_velocity = move_and_slide(_velocity.rotated(rotation_angle), Vector2.UP)
-	
 	_process_collisions()
 
 

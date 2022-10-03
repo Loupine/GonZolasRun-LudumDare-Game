@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player/PlayerSprites/player_sprite_7.png" type="Texture" id=1]
 [ext_resource path="res://Player/PlayerSprites/player_sprite_8.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Player/PlayerSprites/player_sprite_3.png" type="Texture" id=9]
 [ext_resource path="res://Player/Player.gd" type="Script" id=10]
 [ext_resource path="res://Player/PlayerSprites/player_sprite_9.png" type="Texture" id=11]
+[ext_resource path="res://Common/ChailceNogginRegular-2OXoW.ttf" type="DynamicFontData" id=12]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -33,6 +34,15 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=2]
 radius = 49.0102
 
+[sub_resource type="DynamicFont" id=3]
+size = 28
+outline_size = 8
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 12 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 12 )
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 10 )
 
@@ -46,5 +56,26 @@ shape = SubResource( 2 )
 
 [node name="Camera" type="Camera2D" parent="."]
 current = true
+
+[node name="HUD" type="Control" parent="Camera"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Score" type="RichTextLabel" parent="Camera/HUD"]
+margin_left = -124.0
+margin_top = -358.0
+margin_right = 126.0
+margin_bottom = -258.0
+custom_fonts/normal_font = SubResource( 3 )
+text = "
+  Score: "
+
+[node name="ResetButton" type="Button" parent="Camera/HUD"]
+margin_left = 700.0
+margin_top = 143.0
+margin_right = 950.0
+margin_bottom = 243.0
+custom_fonts/font = SubResource( 4 )
+text = "Game Over! Restart?"
 
 [connection signal="animation_finished" from="PlayerAnimator" to="." method="_on_PlayerAnimator_animation_finished"]

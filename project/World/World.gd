@@ -1,16 +1,13 @@
-extends Control
+extends Node2D
 
 
-var score := 0
 var timer_loop_count := 1
-
 
 onready var coin := preload("res://Coin/Coin.tscn")
 onready var enemy := preload("res://Enemy/Enemy.tscn")
 onready var bullet := preload("res://World/Bullet/Bullet.tscn")
 onready var player := get_node("Player")
 onready var player_spawn_points := get_node("PlayerSpawnPoints")
-onready var score_label := get_node("Player/Score")
 
 
 func _ready()-> void:
@@ -28,6 +25,7 @@ func _generate_random_number(minimum:int, maximum:int)-> int:
 func _spawn_new_coin()-> void:
 	var x_position := _generate_random_number(-2000, 2500)
 	var y_position := _generate_random_number(-1500, 1500)
+	
 	var active_coin : Area2D = coin.instance()
 	active_coin.add_to_group("coins")
 	active_coin.position.x = x_position
@@ -49,8 +47,7 @@ func _spawn_new_enemy()-> void:
 
 
 func _on_Coin_score_increase()-> void:
-	score += 100
-	score_label.text = "Score:" + String(score)
+	player.increase_score()
 
 
 func _on_Timer_timeout()-> void:
@@ -62,6 +59,7 @@ func _on_Timer_timeout()-> void:
 func _on_Player_shot_fired(x_velocity, y_velocity)-> void:
 	var _bullet_velocity := Vector2(1000 * x_velocity, 1000 * y_velocity)
 	_bullet_velocity = _bullet_velocity.limit_length(1000)
+	
 	var active_bullet : KinematicBody2D = bullet.instance()
 	active_bullet.add_to_group("bullets")
 	active_bullet.position = player.position
