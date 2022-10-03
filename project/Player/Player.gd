@@ -6,6 +6,7 @@ signal shot_fired(x_velocity, y_velocity)
 const _SPEED := 14
 
 var _velocity := Vector2.ZERO
+var _is_dead := false
 
 onready var animator = find_node("PlayerAnimator")
 onready var collision_shape = find_node("PlayerCollision")
@@ -20,21 +21,22 @@ func _physics_process(delta:float)-> void:
 
 
 func _handle_input(delta:float)-> void:
-	if Input.is_action_pressed("move_up"):
-		_velocity.y = -_SPEED / delta
-	if Input.is_action_pressed("move_down"):
-		_velocity.y = _SPEED / delta
-	if Input.is_action_pressed("move_left"):
-		_velocity.x = -_SPEED / delta
-	if Input.is_action_pressed("move_right"):
-		_velocity.x = _SPEED / delta
+	if _is_dead == false:
+		if Input.is_action_pressed("move_up"):
+			_velocity.y = -_SPEED / delta
+		if Input.is_action_pressed("move_down"):
+			_velocity.y = _SPEED / delta
+		if Input.is_action_pressed("move_left"):
+			_velocity.x = -_SPEED / delta
+		if Input.is_action_pressed("move_right"):
+			_velocity.x = _SPEED / delta
+		if Input.is_action_just_pressed("shoot"):
+			animator.set_playing(true)
+			emit_signal("shot_fired", clamp(_velocity.x, -1.0, 1.0), clamp(_velocity.y, -1.0, 1.0))
 	if not (Input.is_action_pressed("move_up") or Input.is_action_pressed("move_down")):
 		_velocity.y = 0.0
 	if not (Input.is_action_pressed("move_left") or Input.is_action_pressed("move_right")):
 		_velocity.x = 0.0
-	if Input.is_action_just_pressed("shoot"):
-		animator.set_playing(true)
-		emit_signal("shot_fired", clamp(_velocity.x, -1.0, 1.0), clamp(_velocity.y, -1.0, 1.0))
 
 
 func _process_animations()-> void:
@@ -60,6 +62,7 @@ func _process_collisions()-> void:
 func die()-> void:
 	visible = false
 	collision_shape.disabled = true
+	_is_dead = true
 
 
 func _on_PlayerAnimator_animation_finished()-> void:
