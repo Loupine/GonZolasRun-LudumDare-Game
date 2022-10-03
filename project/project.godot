@@ -11,11 +11,14 @@ config_version=4
 [application]
 
 config/name="Multi-D"
-run/main_scene="res://World/World.tscn"
+run/main_scene="res://TitleScreen/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [display]
 
+window/size/width=1280
+window/size/height=720
+window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
 [gui]

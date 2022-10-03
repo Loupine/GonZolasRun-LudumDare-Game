@@ -1,9 +1,10 @@
-extends Node2D
+extends Control
 
 
 var score := 0
 var timer_loop_count := 1
 
+onready var score_label := get_node("Player/Score")
 onready var coin := preload("res://Coin/Coin.tscn")
 onready var enemy := preload("res://Enemy/Enemy.tscn")
 onready var bullet := preload("res://World/Bullet/Bullet.tscn")
@@ -49,7 +50,7 @@ func _spawn_new_enemy()-> void:
 
 func _on_Coin_score_increase()-> void:
 	score += 100
-	print(score)
+	score_label.text = "Score:" + String(score)
 
 
 func _on_Timer_timeout()-> void:
@@ -66,20 +67,3 @@ func _on_Player_shot_fired(x_velocity, y_velocity):
 	active_bullet.position = player.position
 	add_child(active_bullet)
 	active_bullet.set_velocity(_bullet_velocity)
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
